@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mysql_db:
+    image: mysql:8.0
+    container_name: dream_job_db
+    environment:
+      MYSQL_ROOT_PASSWORD: "Kun123456@"
+      MYSQL_DATABASE: "apis"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./Scripts SQL/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql"
+    restart: unless-stopped
+
+  backend_api:
+    build:
+      context: ./apis
+    container_name: dream_job_backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/apis?zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Kun123456@
+    depends_on:
+      - mysql_db
+    restart: unless-stopped
