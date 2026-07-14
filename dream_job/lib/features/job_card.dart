@@ -81,38 +81,10 @@ class _JobCardState extends State<JobCard> {
       }
     }
 
-    return isLoading ? const Center(child: CircularProgressIndicator()) :  Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: const Border(
-          left: BorderSide( //                   <--- left side
-            color: Color(0xFF37bd74),
-            width: 6.0,
-          ),
-          top: BorderSide( //                    <--- top side
-            color: Color(0xFF37bd74),
-            width: 1.0,
-          ),
-          right: BorderSide( //                    <--- top side
-            color: Color(0xFF37bd74),
-            width: 1.0,
-          ),
-          bottom: BorderSide( //                    <--- top side
-            color: Color(0xFF37bd74),
-            width: 1.0,
-          ),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
-            spreadRadius: 0,
-            blurRadius: 10,
-          ),
-        ]
-      ),
+    return isLoading ? const Center(child: CircularProgressIndicator()) :  Card(
+      margin: const EdgeInsets.only(bottom: 12, left: 4, right: 4),
       child: InkWell(
+        borderRadius: BorderRadius.circular(16),
         onTap: () async {
           var userToken = await storage.read(key: 'token');
           if(userToken != null && userToken != ''){
@@ -171,7 +143,7 @@ class _JobCardState extends State<JobCard> {
                       },
                       icon: Icon(isSaved == true ?
                       FluentIcons.bookmark_20_filled : FluentIcons.bookmark_20_regular,
-                        color: isSaved == true ? Color(0xFF44903e) : Colors.grey,
+                        color: isSaved == true ? Colors.black : Colors.grey,
                       ),
                     ),
                   ],
@@ -183,7 +155,7 @@ class _JobCardState extends State<JobCard> {
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                   style: const TextStyle(
-                    color: Color(0xFF44903e),
+                    color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
@@ -216,19 +188,10 @@ class _JobCardState extends State<JobCard> {
                   runSpacing: 6,
                   children: [
                     for(int i = 0; i < skills.length; i++)
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 2),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.grey.withOpacity(0.3),
-                        ),
-                        child: Text(
-                          skills.elementAtOrNull(i),
-                          style: const TextStyle(
-                            color: Colors.black87,
-                            fontSize: 12
-                          ),
-                        ),
+                      Chip(
+                        label: Text(skills.elementAtOrNull(i) ?? ''),
+                        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                   ],
                 ),

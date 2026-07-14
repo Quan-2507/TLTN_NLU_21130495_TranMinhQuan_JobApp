@@ -92,15 +92,17 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
     return Scaffold(
       appBar: _selectPageIndex == 4 || _selectPageIndex == 2 ? null : AppBar(
-        backgroundColor: Color(0xFF44903e),
+        backgroundColor: Colors.white,
+        elevation: 0,
         title: _selectPageIndex != 1 ? const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(EneftyIcons.briefcase_bold, color: Colors.white,),
+            Icon(EneftyIcons.briefcase_bold, color: Colors.black,),
             SizedBox(width: 6),
             Text('DREAM JOB', style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold
+              color: Colors.black,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 1.2
             ),),
           ],
         ) : InkWell(
@@ -110,20 +112,20 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
           },
           child: Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.white
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.grey.shade50,
+                border: Border.all(color: Colors.grey.shade200)
             ),
             height: 42,
-            padding: const EdgeInsets.symmetric(horizontal: 14.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                const Text("Type keyword to search", style: TextStyle(fontSize: 14),),
+                Text("Type keyword to search", style: TextStyle(fontSize: 14, color: Colors.grey[600]),),
                 const Spacer(),
                 Icon(
                   EneftyIcons.search_normal_2_outline,
                   size: 18,
-                  color: Colors.grey[800],
+                  color: Colors.grey[600],
                 )
               ],
             ),
@@ -144,49 +146,29 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
                 Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const MyFollowCompanyScreen()));
               }
             },
-            icon: Icon(
+            icon: const Icon(
               FluentIcons.mail_alert_24_regular,
-              color: Colors.white,
-              shadows: [
-                Shadow(
-                  offset: const Offset(0.0, 1.0),
-                  blurRadius: 10.0,
-                  color: Colors.grey.withOpacity(0.5),
-                ),
-              ],
+              color: Colors.black,
             ),
           ),
         ],
       ),
-      backgroundColor: const Color.fromARGB(255, 241, 242, 243),
+      backgroundColor: Colors.white,
       body: activePage,
       bottomNavigationBar: Container(
         height: 70,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 20,
-            ),
-          ],
+          color: Colors.white,
+          border: Border(top: BorderSide(color: Colors.grey.shade200, width: 1)),
         ),
-        child: ClipRRect(
-          clipBehavior: Clip.antiAlias,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-          child: BottomNavigationBar(
+        child: BottomNavigationBar(
             backgroundColor: Colors.white,
+            elevation: 0,
             type: BottomNavigationBarType.fixed,
             onTap: _selectPage,
             currentIndex: _selectPageIndex,
-            fixedColor: Color(0xFF37bd74),
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.grey,
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(EneftyIcons.briefcase_outline),
@@ -212,7 +194,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 }

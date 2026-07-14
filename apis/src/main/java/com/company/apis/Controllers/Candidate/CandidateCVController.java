@@ -17,10 +17,15 @@ import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
@@ -94,13 +99,51 @@ public class CandidateCVController {
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDisposition(ContentDisposition.attachment().filename("document.pdf").build());
 
-            MultipartFile multipartFile = new MockMultipartFile(
-                    "cv",
-                    "cv.pdf",
-                    "pdf",
-                    pdfBytes);
+            MultipartFile multipartFile = new MultipartFile() {
+                @Override
+                public String getName() {
+                    return "cv";
+                }
+
+                @Override
+                public String getOriginalFilename() {
+                    return "cv.pdf";
+                }
+
+                @Override
+                public String getContentType() {
+                    return "application/pdf";
+                }
+
+                @Override
+                public boolean isEmpty() {
+                    return pdfBytes == null || pdfBytes.length == 0;
+                }
+
+                @Override
+                public long getSize() {
+                    return pdfBytes.length;
+                }
+
+                @Override
+                public byte[] getBytes() {
+                    return pdfBytes;
+                }
+
+                @Override
+                public InputStream getInputStream() {
+                    return new ByteArrayInputStream(pdfBytes);
+                }
+
+                @Override
+                public void transferTo(File dest) throws IOException {
+                    Files.write(dest.toPath(), pdfBytes);
+                }
+            };
+
 
             _cvService.create(new RequestCV(multipartFile, requestDataCreateCV.getName_cv()));
+
             return _baseControllerString.success("Success");
         } catch (HttpException e) {
             return _baseController.error(null, e.StatusCode, e.message);

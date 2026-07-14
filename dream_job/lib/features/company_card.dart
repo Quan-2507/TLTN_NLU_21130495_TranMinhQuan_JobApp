@@ -40,22 +40,12 @@ class _CompanyCardState extends State<CompanyCard> {
     }
 
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(style: BorderStyle.solid, color: Colors.grey),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
-            spreadRadius: 0,
-            blurRadius: 10,
-          ),
-        ]
-      ),
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12, left: 4, right: 4),
+      elevation: 4,
+      shadowColor: Colors.black.withOpacity(0.4),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: SizedBox(
           width: double.infinity,
           child: Column(
@@ -101,18 +91,10 @@ class _CompanyCardState extends State<CompanyCard> {
                 runSpacing: 6,
                 children: [
                   for(int i = 0; i < skills.length; i++)
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 2),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.grey.withOpacity(0.3),
-                      ),
-                      child: Text(
-                        skills.elementAtOrNull(i),
-                        style: const TextStyle(
-                          color: Colors.black87,
-                        ),
-                      ),
+                    Chip(
+                      label: Text(skills.elementAtOrNull(i) ?? ''),
+                      visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
                 ],
               ),

@@ -58,7 +58,7 @@ class _LoginFormState extends State<LoginForm> {
           TextFormField(
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40.0),
+                borderRadius: BorderRadius.circular(8.0),
               ),
               filled: true,
               hintStyle: TextStyle(color: Colors.grey[800]),
@@ -87,7 +87,7 @@ class _LoginFormState extends State<LoginForm> {
           TextFormField(
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40.0),
+                borderRadius: BorderRadius.circular(8.0),
               ),
               filled: true,
               hintStyle: TextStyle(color: Colors.grey[800]),
@@ -128,8 +128,6 @@ class _LoginFormState extends State<LoginForm> {
           ElevatedButton(
             onPressed: _submitLogin,
             style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF44903e),
-                foregroundColor: Colors.white,
               fixedSize: const Size(150, 45)
             ),
             child: const Text(

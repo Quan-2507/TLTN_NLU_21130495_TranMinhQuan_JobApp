@@ -77,7 +77,7 @@ class _LatestJobsState extends State<LatestJobs> {
                           physics: const ClampingScrollPhysics(),
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemCount: jobList.sublist(0,8).length,
+                          itemCount: jobList.length > 8 ? 8 : jobList.length,
                           itemBuilder: (BuildContext context, int index) =>
                               JobCard(jobId: jobList[index]['id'], notifyParent: (){},)
                       ),
