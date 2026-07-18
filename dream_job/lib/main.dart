@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:one_context/one_context.dart';
+import 'package:dream_job/screens/onboarding/splash_screen.dart';
 import 'package:dream_job/screens/tabs_screen.dart';
 
 
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: const ColorScheme.light(
-    primary: Colors.black,
+    primary: Color(0xFF246BFD),
     onPrimary: Colors.white,
     secondary: Colors.grey,
     surface: Colors.white,
@@ -24,7 +25,7 @@ final theme = ThemeData(
   cardTheme: CardThemeData(
     elevation: 0,
     shape: RoundedRectangleBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(12)),
+      borderRadius: const BorderRadius.all(Radius.circular(20)),
       side: BorderSide(color: Colors.grey.shade200, width: 1),
     ),
     color: Colors.white,
@@ -40,11 +41,11 @@ final theme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF246BFD),
       foregroundColor: Colors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(100),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
       textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -67,7 +68,7 @@ class App extends StatelessWidget {
       theme: theme,
       builder: OneContext().builder,
       navigatorKey: OneContext().key,
-      home: const TabsScreen(),
+      home: const SplashScreen(),
     );
   }
 }

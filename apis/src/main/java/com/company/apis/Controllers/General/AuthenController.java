@@ -61,6 +61,42 @@ public class AuthenController {
         }
     }
 
+    @PostMapping("/login/facebook")
+    public ResponseEntity<?> loginFacebook(@RequestBody RequestToken requestToken) {
+        try {
+            // TODO: Implement actual Facebook Token Verification logic
+            TokenUser tokenUser = new TokenUser();
+            tokenUser.setToken("dummy_facebook_token");
+            return _baseController.success(tokenUser);
+        } catch (Exception e) {
+            return _baseController.error(null, 500, e.getMessage());
+        }
+    }
+
+    @PostMapping("/login/google")
+    public ResponseEntity<?> loginGoogle(@RequestBody RequestToken requestToken) {
+        try {
+            // TODO: Implement actual Google Token Verification logic
+            TokenUser tokenUser = new TokenUser();
+            tokenUser.setToken("dummy_google_token");
+            return _baseController.success(tokenUser);
+        } catch (Exception e) {
+            return _baseController.error(null, 500, e.getMessage());
+        }
+    }
+
+    @PostMapping("/login/apple")
+    public ResponseEntity<?> loginApple(@RequestBody RequestToken requestToken) {
+        try {
+            // TODO: Implement actual Apple Token Verification logic
+            TokenUser tokenUser = new TokenUser();
+            tokenUser.setToken("dummy_apple_token");
+            return _baseController.success(tokenUser);
+        } catch (Exception e) {
+            return _baseController.error(null, 500, e.getMessage());
+        }
+    }
+
     @PostMapping("/check_token")
     public ResponseEntity<?> postToken(@RequestBody RequestToken requestToken) {
         try {
