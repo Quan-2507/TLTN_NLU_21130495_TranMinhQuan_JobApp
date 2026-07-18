@@ -145,39 +145,94 @@ class _JobsScreenState extends State<JobsScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              height: 160,
               decoration: BoxDecoration(
                 color: const Color(0xFF246BFD),
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  const Text("See how you can\nfind a job quickly!", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold, height: 1.2)),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: (){},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF246BFD),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      elevation: 0,
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    top: 0,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(24),
+                        bottomRight: Radius.circular(24),
+                      ),
+                      child: Image.network(
+                        'https://img.freepik.com/free-photo/young-businesswoman-standing-with-laptop-smiling-camera-white-background_114579-79883.jpg', 
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    child: const Text("Read more", style: TextStyle(fontWeight: FontWeight.bold)),
-                  )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("See how you can\nfind a job quickly!", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, height: 1.2)),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: (){},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: const Color(0xFF246BFD),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            elevation: 0,
+                          ),
+                          child: const Text("Read more", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
 
-          //Hot for you
-          isLoggedIn == true ? const HotJobs() : const SizedBox.shrink(),
+          // Recommendation Header
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Recommendation", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(50, 30), tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                  child: const Text("See All", style: TextStyle(color: Color(0xFF246BFD), fontWeight: FontWeight.w600)),
+                ),
+              ],
+            ),
+          ),
+          
+          // Recommendation List
+          isLoggedIn ? const HotJobs() : const SizedBox.shrink(),
+
+          // Recent Jobs Header
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Recent Jobs", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(50, 30), tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                  child: const Text("See All", style: TextStyle(color: Color(0xFF246BFD), fontWeight: FontWeight.w600)),
+                ),
+              ],
+            ),
+          ),
 
           // Filter Chips
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
             child: Row(
               children: [
                 _buildFilterChip("All", true),
@@ -190,18 +245,11 @@ class _JobsScreenState extends State<JobsScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 12),
 
-          //Latest jobs
+          // Latest Jobs List
           const LatestJobs(),
-
-          //Advertisment
-          const AdsCarousel(),
-
-          //Viewed jobs
-          isLoggedIn == true ? const ViewedJobs() : const SizedBox.shrink(),
-
-          //Saved jobs
-          isLoggedIn == true ? const SavedJobs() : const SizedBox.shrink(),
+          const SizedBox(height: 24),
         ],
       ),
     );

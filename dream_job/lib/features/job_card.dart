@@ -60,7 +60,7 @@ class _JobCardState extends State<JobCard> {
         isSaved = jobInfo['job_is_save'] ?? false;
         logoImage = jobInfo['company']['logo_image'] ?? 'https://i.pravatar.cc/40';
         province = jobInfo['company']['city_province']['name'] ?? 'Ho Chi Minh';
-        salary = (jobInfo['salary_min'] ?? 'Negotiable') + (jobInfo['salary_max'] != null ? ' - ' + jobInfo['salary_max']  : '');
+        salary = (jobInfo['salary_min'] != null ? '\$${jobInfo['salary_min']}' : 'Negotiable') + (jobInfo['salary_max'] != null ? ' - \$${jobInfo['salary_max']} /month'  : ' /month');
         createdDate = AppDateUtils.daysBetween(jobInfo['start_date'] ?? DateFormat("dd-MM-yy").format(DateTime.now()));
         jobSkills = jobInfo['skills'];
         isLoading = false;
@@ -97,7 +97,7 @@ class _JobCardState extends State<JobCard> {
           Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => JobsDetailScreen(jobId: jobId)));
         },
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: SizedBox(
             width: double.infinity,
             child: Column(
@@ -105,26 +105,55 @@ class _JobCardState extends State<JobCard> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ClipOval(// Image border
-                      child: SizedBox.fromSize(
-                        size: const Size(40, 40),
-                        child: Image.network(
-                          logoImage,
-                          fit: BoxFit.cover,
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade50,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ClipOval(
+                        child: SizedBox.fromSize(
+                          size: const Size(40, 40),
+                          child: Image.network(
+                            logoImage,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 12),
                     Expanded(
-                      child: Text(
-                        companyName,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            jobTitle,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            companyName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
                       onPressed: () async {
                         var userToken = await storage.read(key: "token");
                         if (userToken == null) {
@@ -133,7 +162,7 @@ class _JobCardState extends State<JobCard> {
                               builder: (BuildContext dialogContext) {
                                 return const LoginRequestModal();
                               });
-                        }else{
+                        } else {
                           Map<String, String> jsonBody2 = {
                             'job_id': jobId.toString(),
                           };
@@ -142,62 +171,69 @@ class _JobCardState extends State<JobCard> {
                         }
                       },
                       icon: Icon(isSaved == true ?
-                      FluentIcons.bookmark_20_filled : FluentIcons.bookmark_20_regular,
-                        color: isSaved == true ? const Color(0xFF246BFD) : Colors.grey,
+                      FluentIcons.bookmark_24_filled : FluentIcons.bookmark_24_regular,
+                        color: const Color(0xFF246BFD),
+                        size: 24,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  jobTitle,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                  style: const TextStyle(
-                    color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const Icon(EneftyIcons.location_outline, size: 18),
-                    const SizedBox(width: 4),
-                    Text(province),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(EneftyIcons.dollar_circle_outline, size: 18),
-                    const SizedBox(width: 4),
-                    Text(salary),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(EneftyIcons.clock_2_outline, size: 18),
-                    const SizedBox(width: 4),
-                    Text(createdDate),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 6,
-                  children: [
-                    for(int i = 0; i < skills.length; i++)
-                      Chip(
-                        label: Text(skills.elementAtOrNull(i) ?? ''),
-                        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.only(left: 68.0), // Align with text above
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        province + ", United States", // Mocking country for design match
+                        style: TextStyle(color: Colors.grey[700], fontSize: 13),
                       ),
-                  ],
+                      const SizedBox(height: 6),
+                      Text(
+                        salary,
+                        style: const TextStyle(
+                          color: Color(0xFF246BFD),
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          // Hardcoding tags to match design if skills are empty
+                          _buildTag("Full Time"),
+                          _buildTag("Onsite"),
+                          for (int i = 0; i < skills.length; i++)
+                            _buildTag(skills.elementAt(i).toString()),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTag(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.grey[700],
+          fontSize: 10,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );

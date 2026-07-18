@@ -180,7 +180,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
                   activeIcon: Icon(FluentIcons.bookmark_24_filled)),
               BottomNavigationBarItem(
                   icon: Icon(EneftyIcons.briefcase_outline),
-                  label: 'Applications',
+                  label: 'Application',
                   activeIcon: Icon(EneftyIcons.briefcase_bold)),
               BottomNavigationBarItem(
                   icon: Icon(FluentIcons.chat_24_regular),
