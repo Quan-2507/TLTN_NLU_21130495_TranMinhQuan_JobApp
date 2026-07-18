@@ -143,7 +143,7 @@ class _JobCardState extends State<JobCard> {
                       },
                       icon: Icon(isSaved == true ?
                       FluentIcons.bookmark_20_filled : FluentIcons.bookmark_20_regular,
-                        color: isSaved == true ? Colors.black : Colors.grey,
+                        color: isSaved == true ? const Color(0xFF246BFD) : Colors.grey,
                       ),
                     ),
                   ],

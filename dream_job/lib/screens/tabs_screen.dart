@@ -91,7 +91,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     }
 
     return Scaffold(
-      appBar: _selectPageIndex == 4 || _selectPageIndex == 2 ? null : AppBar(
+      appBar: _selectPageIndex == 0 || _selectPageIndex == 4 || _selectPageIndex == 2 ? null : AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         title: _selectPageIndex != 1 ? const Row(
@@ -167,29 +167,29 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
             type: BottomNavigationBarType.fixed,
             onTap: _selectPage,
             currentIndex: _selectPageIndex,
-            selectedItemColor: Colors.black,
+            selectedItemColor: const Color(0xFF246BFD),
             unselectedItemColor: Colors.grey,
             items: const [
               BottomNavigationBarItem(
-                  icon: Icon(EneftyIcons.briefcase_outline),
-                  label: 'Jobs',
-                  activeIcon: Icon(EneftyIcons.briefcase_bold)),
-              BottomNavigationBarItem(
                   icon: Icon(EneftyIcons.home_2_outline),
-                  label: 'Companies',
+                  label: 'Home',
                   activeIcon: Icon(EneftyIcons.home_2_bold)),
               BottomNavigationBarItem(
-                  icon: Icon(EneftyIcons.paperclip_2_outline),
-                  label: 'My Jobs',
-                  activeIcon: Icon(EneftyIcons.paperclip_2_bold)),
+                  icon: Icon(FluentIcons.bookmark_24_regular),
+                  label: 'Saved Jobs',
+                  activeIcon: Icon(FluentIcons.bookmark_24_filled)),
               BottomNavigationBarItem(
-                  icon: Icon(EneftyIcons.element_3_outline),
-                  label: 'Tools',
-                  activeIcon: Icon(EneftyIcons.element_3_bold)),
+                  icon: Icon(EneftyIcons.briefcase_outline),
+                  label: 'Applications',
+                  activeIcon: Icon(EneftyIcons.briefcase_bold)),
+              BottomNavigationBarItem(
+                  icon: Icon(FluentIcons.chat_24_regular),
+                  label: 'Message',
+                  activeIcon: Icon(FluentIcons.chat_24_filled)),
               BottomNavigationBarItem(
                 icon: Icon(EneftyIcons.user_outline),
                 activeIcon: Icon(EneftyIcons.user_bold),
-                label: 'Account',
+                label: 'Profile',
               ),
             ],
           ),

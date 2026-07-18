@@ -53,7 +53,7 @@ class _LatestJobsState extends State<LatestJobs> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
-                            'Latest jobs',
+                            'Recent Jobs',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -66,8 +66,8 @@ class _LatestJobsState extends State<LatestJobs> {
                               onPressed: (){
                                 Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const ViewmoreScreen(dataType: 'Latest Jobs',)));
                               },
-                              child: const Text('View more',style: TextStyle(
-                                  fontSize: 14, color: Colors.blueAccent)),
+                              child: const Text('See All',style: TextStyle(
+                                  fontSize: 14, color: Color(0xFF246BFD), fontWeight: FontWeight.bold)),
                             ),
                           ),
                         ],
