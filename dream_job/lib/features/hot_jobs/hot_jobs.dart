@@ -69,7 +69,7 @@ class _HotJobsState extends State<HotJobs> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text('Jobs fit you',
+                    const Text('Recommendation',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -81,8 +81,8 @@ class _HotJobsState extends State<HotJobs> {
                         onPressed: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const ViewmoreScreen(dataType: 'Jobs fit you',)));
                         },
-                        child: const Text('View more',style: TextStyle(
-                            fontSize: 14, color: Colors.blueAccent)),
+                        child: const Text('See All',style: TextStyle(
+                            fontSize: 14, color: Color(0xFF246BFD), fontWeight: FontWeight.bold)),
                       ),
                     ) : const SizedBox.shrink(),
                   ],
