@@ -14,6 +14,24 @@ class _LatestJobsState extends State<LatestJobs> {
   var jobList = [];
   bool isLoading = true;
 
+  Widget _buildFilterChip(String label, bool isSelected) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      decoration: BoxDecoration(
+        color: isSelected ? const Color(0xFF246BFD) : Colors.white,
+        border: Border.all(color: isSelected ? const Color(0xFF246BFD) : const Color(0xFF246BFD)),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: isSelected ? Colors.white : const Color(0xFF246BFD),
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -73,6 +91,22 @@ class _LatestJobsState extends State<LatestJobs> {
                         ],
                       ),
                       const SizedBox(height: 10),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: Row(
+                          children: [
+                            _buildFilterChip("All", true),
+                            const SizedBox(width: 8),
+                            _buildFilterChip("Design", false),
+                            const SizedBox(width: 8),
+                            _buildFilterChip("Technology", false),
+                            const SizedBox(width: 8),
+                            _buildFilterChip("Finance", false),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
                       ListView.builder(
                           physics: const ClampingScrollPhysics(),
                           shrinkWrap: true,

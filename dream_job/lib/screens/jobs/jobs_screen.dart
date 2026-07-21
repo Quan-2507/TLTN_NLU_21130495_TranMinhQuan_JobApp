@@ -194,58 +194,8 @@ class _JobsScreenState extends State<JobsScreen> {
             ),
           ),
 
-          // Recommendation Header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Recommendation", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(50, 30), tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                  child: const Text("See All", style: TextStyle(color: Color(0xFF246BFD), fontWeight: FontWeight.w600)),
-                ),
-              ],
-            ),
-          ),
-          
           // Recommendation List
           isLoggedIn ? const HotJobs() : const SizedBox.shrink(),
-
-          // Recent Jobs Header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Recent Jobs", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(50, 30), tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                  child: const Text("See All", style: TextStyle(color: Color(0xFF246BFD), fontWeight: FontWeight.w600)),
-                ),
-              ],
-            ),
-          ),
-
-          // Filter Chips
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-            child: Row(
-              children: [
-                _buildFilterChip("All", true),
-                const SizedBox(width: 8),
-                _buildFilterChip("Design", false),
-                const SizedBox(width: 8),
-                _buildFilterChip("Technology", false),
-                const SizedBox(width: 8),
-                _buildFilterChip("Finance", false),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
 
           // Latest Jobs List
           const LatestJobs(),
