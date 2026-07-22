@@ -398,7 +398,6 @@ class _JobsDetailScreenState extends State<JobsDetailScreen>
                             ),
                             child: const Text('Apply', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                           ),
-                    ),
                   )),
             ),
             body: SingleChildScrollView(
